@@ -1,0 +1,73 @@
+apiVersion: cluster.k8s.io/v1alpha1
+kind: MachineSet
+metadata:
+  generation: 1
+  labels:
+    sigs.k8s.io/cluster-api-cluster: <cluster_name>
+    sigs.k8s.io/cluster-api-machine-role: gpu
+    sigs.k8s.io/cluster-api-machine-type: gpu-worker
+  name: gpu-machineset
+  namespace: openshift-cluster-api
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      sigs.k8s.io/cluster-api-cluster: <cluster_name>
+      sigs.k8s.io/cluster-api-machineset: gpu-machineset-us-west-2a
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        sigs.k8s.io/cluster-api-cluster: <cluster_name>
+        sigs.k8s.io/cluster-api-machine-role: gpu
+        sigs.k8s.io/cluster-api-machine-type: gpu-worker
+        sigs.k8s.io/cluster-api-machineset: gpu-machineset-us-west-2a
+    spec:
+      metadata:
+        creationTimestamp: null
+      providerSpec:
+        value:
+          ami:
+            arn: null
+            filters: null
+            id: ami-xyz
+          apiVersion: awsproviderconfig.k8s.io/v1alpha1
+          credentialsSecret: null
+          deviceIndex: 0
+          iamInstanceProfile:
+            arn: null
+            filters: null
+            id: <cluster_name>-gpu-machineset-profile
+          instanceType: g3.4xlarge
+          keyName: null
+          kind: AWSMachineProviderConfig
+          loadBalancers: null
+          metadata:
+            creationTimestamp: null
+          placement:
+            availabilityZone: us-west-2a
+            region: us-west-2
+          publicIp: null
+          securityGroups:
+          - arn: null
+            filters:
+            - name: tag:Name
+              values:
+              - <cluster_name>_worker_sg
+            id: null
+          subnet:
+            arn: null
+            filters:
+            - name: tag:Name
+              values:
+              - <cluster_name>-us-west-2a
+            id: null
+          tags:
+          - name: openshiftClusterID
+            value: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+          - name: kubernetes.io/cluster/<cluster_name>
+            value: owned
+          userDataSecret:
+            name: worker-user-data
+      versions:
+        kubelet: ""
