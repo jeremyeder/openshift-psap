@@ -11,3 +11,8 @@ oc scale --replicas=0 machineset -n openshift-cluster-api gpu-machineset
 
 oc logs -n openshift-cluster-api $(oc get pods -n openshift-cluster-api|grep clusterapi-manager-controllers-|awk '{print $1}') -c machine-controller -f
 ```
+
+# TODO:
+* Priority and Preemption examples
+* Taints and Toleration examples
+* Usage of GPU Operator
