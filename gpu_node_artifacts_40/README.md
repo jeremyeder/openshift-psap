@@ -13,6 +13,8 @@ oc logs -n openshift-cluster-api $(oc get pods -n openshift-cluster-api|grep clu
 ```
 
 # TODO:
+* Node Feature Discovery deployment
+* Usage of GPU Operator
+* Basic GPU cuda-vector-add example
 * Priority and Preemption examples
 * Taints and Toleration examples
-* Usage of GPU Operator
