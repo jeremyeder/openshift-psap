@@ -25,6 +25,9 @@ spec:
     spec:
       metadata:
         creationTimestamp: null
+        labels:
+          cpumanager=true
+          openshift.com/gpu-accelerator=true
       providerSpec:
         value:
           ami:
