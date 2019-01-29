@@ -67,6 +67,7 @@ spec:
             id: null
           tags:
           - name: openshiftClusterID
+# oc get clusterversion version -ojson | jq .spec.clusterID
             value: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
           - name: kubernetes.io/cluster/<cluster_name>
             value: owned
